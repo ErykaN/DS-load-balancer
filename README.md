@@ -105,25 +105,6 @@ It is advisable to run this command before executing the main code to eliminate 
 <li> A heartbeat thread that transmits a heartbeat message every 0.2 seconds is installed on every server. A new server spawns when a server is pronounced dead, which happens after two attempts without detecting a heartbeat. This method ensures system stability by preventing premature server death declarations caused by network oscillations.</li>
 </ol>
 
-# Troubleshooting
-
-## Docker Exit with Code 137
-Code 137 indicated RAM memory related issue. Stop and remove already runining container to free up space.
-
-## Removing Docker Containers
-
-### 1. Stop docker container
-```
-Particular container: docker stop container_id
-Stop all runing container: docker stop $(docker ps -a -q)
-```
-
-### 2. Remove docker container
-```
-Particular container: docker rm container_id
-Stop all runing container: docker rm $(docker ps -a -q)
-```
-
 
 # Evaluation
 
