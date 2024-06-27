@@ -100,9 +100,9 @@ It is advisable to run this command before executing the main code to eliminate 
 
 # Design Choices
 <ol>
-<li> When executing the /add endpoint, users may provide existing server hostnames as part of the request. In such cases, the load balancer takes a proactive approach to ensure that the specified num_add parameter is honored. Even if the user supplies hostnames that already exist in the system, the load balancer will ignore already existing hostnames and generate new hostnames for additional servers to fulfill the exact count specified by num_add.
-<li> When executing the /rm endpoint, users may provide hostnames for removal. To ensure the specified number of servers to be removed is consistently achieved, the load balancer employs a strategy wherein, if the user-provided hostname doesn't exist in the system, it randomly selects and removes a server hostname from the existing set.
-<li> Every server is equipped with a heartbeat thread that sends a heartbeat message every 0.2 seconds. If no heartbeat is detected for two consecutive attempts, the server is declared dead, triggering the spawning of a new server. This mechanism prevents premature declarations of server death due to network fluctuations, ensuring stability in the system.</li>
+<li> Users may provide current server hostnames in their request when using the /add endpoint. In certain situations, the load balancer ensures  the specific num_add parameter is added. The load balancer will produce new hostnames for additional servers to meet the precise amount given by num_add, even if the user gives hostnames that currently exist in the system.
+<li> The /rm endpoint allows users to provide hostnames to be removed. In order to guarantee that the number of servers to be eliminated is always the same, the load balancer uses a technique in which, in the event that the hostname supplied by the user is not already in the system, it chooses at random a server hostname to remove from the list.
+<li> A heartbeat thread that transmits a heartbeat message every 0.2 seconds is installed on every server. A new server spawns when a server is pronounced dead, which happens after two attempts without detecting a heartbeat. This method ensures system stability by preventing premature server death declarations caused by network oscillations.</li>
 </ol>
 
 # Troubleshooting
