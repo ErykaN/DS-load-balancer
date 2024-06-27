@@ -12,15 +12,12 @@
   - [Remove Existing Container](#interact-with-system)
   - [Clear Existing Images](#clear-existing-images)
 - [Design Choices](#design-choices)
-- [Troubleshooting](#troubleshooting)
-  - [Docker Exit with Code 137](#docker-exit-with-code-137)
-  - [Removing Docker Containers](#removing-docker-containers)
 - [Evaluation](#evaluation)
   - [Server Load Analysis](#server-load-analysis)
   - [Server Avg Load Analysis](#server-avg-load-analysis)
   - [Server Failure Testing](#server-failure-testing)
-  - [Hashing Function Variation Analysis](#hashing-function-variation-analysis)
-- [Group Details](#group-details)
+  - [Hashing Function Variation Analysis](#hashing-function-analysis)
+
 
 
 # Prerequisite
