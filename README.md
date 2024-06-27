@@ -109,7 +109,7 @@ It is advisable to run this command before executing the main code to eliminate 
 # Evaluation
 
 ## Server Load Analysis
-To analyze the distribution load of 10,000 asynchronous requests on N=3 servers, follow these commands:
+To analyze the distribution load of 10,000 asynchronous requests on N=4 servers, follow these commands:
 
 #### Change to the 'analysis' directory:
 
@@ -121,20 +121,17 @@ cd analysis
 python analysis.py
 ```
 
-The analysis.py script sends 10,000 asynchronous requests (/home requests) to the load balancer. Based on the responses received, it plots a frequency map illustrating how many responses come from each server.
+Ten thousand asynchronous requests (/home requests) are sent to the load balancer via the analysis.py script. It creates a frequency map that shows how many responses originate from each server based on the responses it receives.
 
-Ensure that the necessary dependencies are installed and the system is properly configured before executing the analysis script.
-
-<img src="analysis/old_hash/n_3_load.png" >
-
+Before running the analysis script, make sure the system is configured correctly and that the required dependencies are installed.
 
 
 ## Server Avg Load Analysis
 
-Modify the NUM_INITIAL_SERVERS = 3 line number 9 of `load_balancer/client_handler.py` with 2 to 6 and run analysis.py to get average load and standard distribution of load distribution.
-Follow folder `analysis/old_hash/` for exact distribution bar plots. 
+Modify the NUM_INITIAL_SERVERS = 3 line number 9 of `client_handler.py` with 2 to 6 and run analysis.py to get average load and standard distribution of load distribution.
+Follow folder `hash/` for exact distribution bar plots. 
 
-<img src = "analysis/part2.png">
+<img src = "part2.png">
 
 ## Server Failure Testing
 
@@ -150,17 +147,17 @@ cd analysis
 python kill_server.py
 ```
 
-The kill_server.py script is designed to simulate the process of killing a server, validating the functionality of all endpoints in the event of server failure, and assessing the prompt respawn of the server. The effectiveness of server respawn is verified through the analysis of load distribution and the count of dropped requests(failed) during the time it takes for the heartbeat mechanism to detect and respawn the server.
+The purpose of the kill_server.py script is to mimic the act of killing a server, verify that all endpoints function properly in the event of a server failure, and evaluate whether the server respawns quickly. The examination of load distribution and the number of dropped requests (failed) over the period of time it takes for the heartbeat mechanism to detect and respawn the server are used to verify the efficacy of server respawn.
 
-## Hashing Function Variation Analysis
-After testing all the 9 combinations of **SHA-256, SHA-1, and MD5** hashing functions for request and server hashings, we found that the most effective combination is:
+## Hashing Function Analysis
+We used the following hashing functions: 
 
 - Server Hashing: SHA-1
 - Request Hashing: MD5
 
-To implement this new hash function configuration, follow these steps:
+To implement the hash function configuration, follow these steps:
 
-1. Open the file `load_balancer/consistent_hashing.py` and locate the `server_hash_func`  and `request_hash_func` definition.
+1. Open the file `consistent_hashing.py` and locate the `server_hash_func`  and `request_hash_func` definition.
 
 2. Comment the alternative hash function provided. 
 
@@ -168,10 +165,9 @@ To implement this new hash function configuration, follow these steps:
 
 4. Re-run the analysis script after deploying the load balancer again.
 
-5. Ensure that you have cleared previous containers and images, and rebuild the project before executing the analysis script. This ensures that the new hash function is applied to the load balancer and the analysis is based on the updated configuration.
+5. Ensure that you have cleared previous containers and images, and rebuild the project before executing the analysis script. 
 
-The evaluation results of new hash function on variable number of servers are present in `analysis/md5_hash`
 
-<img src="analysis/part2_new.png">
+
 
 </font>
